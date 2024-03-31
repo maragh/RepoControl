@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Repository Control</title>
+    <link rel="stylesheet" href="scss/styles.scss">
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <div class="container py-4 px-3 mx-auto" id="app">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-12">
+                <button class="btn btn-success mb-2 mt-5 text-uppercase" v-on:click="load_repos">load public repositories</button>
+
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="5" class="text-center">Public Repositories</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>FullName</th>
+                            <!-- <th>Owner</th> -->
+                            <th>Fork</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="repo in repositories">
+                            <td><input type="checkbox" v-model="repository" v:id="repo.id" :value="repo.full_name"></td>
+                            <td>{{repo.name}}</td>
+                            <td>{{repo.full_name}}</td>
+                            <!-- <td>{{repo.owner.login}}</td> -->
+                            <td>{{repo.fork}}</td>
+                            <td>{{repo.description}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-danger text-uppercase" v-on:click="delete_repository">delete repositories</button>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
