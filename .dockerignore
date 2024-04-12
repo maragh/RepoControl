@@ -1,0 +1,7 @@
+.git*
+.dockerignore
+.parcel-cache
+dist
+Dockerfile
+docker-compose.yml
+README.md
