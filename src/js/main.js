@@ -1,4 +1,7 @@
 import * as bootstrap from 'bootstrap'
+import * as Popper from "@popperjs/core"
+
+import $ from 'jquery'
 import { createApp, reactive } from "vue/dist/vue.esm-bundler.js"
 import 'dotenv/config'
 import _ from 'lodash'
@@ -40,7 +43,12 @@ const App = {
 
         },
         delete_repository: function(){
+            
+            let modal = bootstrap.Modal.getInstance(document.getElementById("confirm_action_modal"))
+            modal.hide()
+
             _.map(this.repository, this.delete_repo)
+
             this.repository = []
             this.repositories = []
             this.load_repos()
