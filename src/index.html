@@ -25,7 +25,6 @@
                             <th></th>
                             <th>Name</th>
                             <th>FullName</th>
-                            <!-- <th>Owner</th> -->
                             <th>Fork</th>
                             <th>Description</th>
                         </tr>
@@ -35,13 +34,30 @@
                             <td><input type="checkbox" v-model="repository" v:id="repo.id" :value="repo.full_name"></td>
                             <td>{{repo.name}}</td>
                             <td>{{repo.full_name}}</td>
-                            <!-- <td>{{repo.owner.login}}</td> -->
                             <td>{{repo.fork}}</td>
                             <td>{{repo.description}}</td>
                         </tr>
                     </tbody>
                 </table>
-                <button class="btn btn-danger btn-sm my-2 text-uppercase" v-on:click="delete_repository">delete repositories</button>
+                <button type="button" class="btn btn-danger btn-sm my-2 text-uppercase" data-bs-toggle="modal" data-bs-target="#confirm_action_modal">delete repositories</button>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="confirm_action_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirm_action_modal_label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="confirm_action_modal_label">Confirm Action</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete the selected repositories?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" v-on:click="delete_repository">Confirm</button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
