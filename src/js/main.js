@@ -1,7 +1,6 @@
 import * as bootstrap from 'bootstrap'
 import * as Popper from "@popperjs/core"
 
-import $ from 'jquery'
 import { createApp, reactive } from "vue/dist/vue.esm-bundler.js"
 import 'dotenv/config'
 import _ from 'lodash'
