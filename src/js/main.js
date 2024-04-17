@@ -11,6 +11,8 @@ globalThis.__VUE_OPTIONS_API__ = process.env.NODE_ENV === "development"
 globalThis.__VUE_PROD_DEVTOOLS__ = process.env.NODE_ENV === "development"
 globalThis.__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = process.env.NODE_ENV === "development"
 
+const defaultPageSize = 30
+
 const App = {
     created(){
         console.log(`environment: ${process.env.NODE_ENV}`)
@@ -20,14 +22,28 @@ const App = {
     },
     data(){
         return {
+            pageNumber: 1,
+            repositoryCount: 0,
+            maxSize: defaultPageSize,
             repositories: [],
             repository: []
         }
     },
     methods:{
-        load_repos: function(){
-            api.fetch_repositories().then(data => {
+        nextPage: function () {
+            if (this.repositoryCount < this.maxSize) return
+            this.pageNumber += 1
+            this.load_repos(this.pageNumber)
+        },
+        previousPage: function() {
+            if (this.pageNumber <= 1) return
+            this.pageNumber -= 1
+            this.load_repos(this.pageNumber)
+        },
+        load_repos: async function(page){
+            api.fetch_repositories(page).then(data => {
                 this.repositories = data
+                this.repositoryCount = data.length
                 console.log(data)
             }).catch(error => {
                 console.log(error)
@@ -39,10 +55,8 @@ const App = {
             }).catch(error => {
                 console.error(error)
             })
-
         },
         delete_repository: function(){
-            
             let modal = bootstrap.Modal.getInstance(document.getElementById("confirm_action_modal"))
             modal.hide()
 
@@ -51,10 +65,8 @@ const App = {
             this.repository = []
             this.repositories = []
             this.load_repos()
-
         }
     }
 }
-
 
 createApp(App).mount("#app")
