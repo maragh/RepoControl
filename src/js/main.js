@@ -12,6 +12,7 @@ globalThis.__VUE_PROD_DEVTOOLS__ = process.env.NODE_ENV === "development"
 globalThis.__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = process.env.NODE_ENV === "development"
 
 const defaultPageSize = 30
+const pageSize = process.env.RESULTS_PER_PAGE || defaultPageSize
 
 const App = {
     created(){
@@ -24,7 +25,7 @@ const App = {
         return {
             pageNumber: 1,
             repositoryCount: 0,
-            maxSize: defaultPageSize,
+            maxSize: pageSize,
             repositories: [],
             repository: []
         }
