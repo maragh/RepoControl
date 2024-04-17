@@ -8,12 +8,12 @@
     <link rel="shortcut icon" href="assets/gcr-logo-converted.svg" type="image/x-icon">
     <script type="module" src="js/main.js"></script>
   </head>
-  <body class="container-fluid py-4 px-3 mx-auto">
-    <main class="row justify-content-center col-md-12" id="app">
-        <header class="text-center">
+  <body class="container-fluid mx-auto col-md-12">
+    <main class="row justify-content-center" id="app">
+        <header class="text-center sticky-top text-bg-light py-2">
             <h1>Github Repository Control</h1>
         </header>
-        <div class="">
+        <div class="p-3">
             <button class="btn btn-success btn-sm my-2 text-uppercase" v-on:click="load_repos">load public repositories</button>
             <div v-if="repositories.length" class="">
                 <table class="table table-sm table-bordered">
