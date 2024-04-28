@@ -6,6 +6,7 @@ import 'dotenv/config'
 import _ from 'lodash'
 
 import api from './api'
+import { hideButton, unHideButton } from './ui'
 
 globalThis.__VUE_OPTIONS_API__ = process.env.NODE_ENV === "development"
 globalThis.__VUE_PROD_DEVTOOLS__ = process.env.NODE_ENV === "development"
@@ -85,14 +86,6 @@ const App = {
             this.load_repos()
         }
     }
-}
-
-const hideButton = (button) => {
-    button.classList.add('invisible')
-}
-
-const unHideButton = (button) => {
-    button.classList.remove('invisible')
 }
 
 createApp(App).mount("#app")
