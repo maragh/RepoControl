@@ -31,13 +31,30 @@ const App = {
         }
     },
     methods:{
-        nextPage: function () {
-            if (this.repositoryCount < this.maxSize) return
+        nextPage: function (event) {
+            const nextButton = event.target
+            const previousButton = nextButton.previousSibling
+
+            unHideButton(previousButton)
+
+            if (this.repositoryCount < this.maxSize) {
+                hideButton(nextButton)
+                return
+            }
+            
             this.pageNumber += 1
             this.load_repos(this.pageNumber)
         },
-        previousPage: function() {
-            if (this.pageNumber <= 1) return
+        previousPage: function(event) {
+            const previousButton = event.target
+            const nextButton = previousButton.nextSibling
+            unHideButton(nextButton)
+
+            if (this.pageNumber <= 1) {
+                hideButton(previousButton)
+                return
+            }
+
             this.pageNumber -= 1
             this.load_repos(this.pageNumber)
         },
@@ -68,6 +85,14 @@ const App = {
             this.load_repos()
         }
     }
+}
+
+const hideButton = (button) => {
+    button.classList.add('invisible')
+}
+
+const unHideButton = (button) => {
+    button.classList.remove('invisible')
 }
 
 createApp(App).mount("#app")
