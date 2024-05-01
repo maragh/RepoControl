@@ -7,7 +7,6 @@ const service = axios.create({
         "X-GitHub-Api-Version": "2022-11-28",
         "Accept": "application/vnd.github+json"
     }
-    
 })
 
 export default {
@@ -18,8 +17,8 @@ export default {
         const response = await service.get(`/repos/${repo}`);
         return await response.data
     },
-    fetch_repositories: async function(){
-        const response = await service.get("/user/repos?visibility=public");
+    fetch_repositories: async function(page = 1){
+        const response = await service.get(`/user/repos?visibility=public&sort=created&page=${page}`);
         return await response.data
     },
     delete_repository: async function(repo){
